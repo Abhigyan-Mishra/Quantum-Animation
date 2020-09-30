@@ -65,7 +65,7 @@ class BlochSphere(SpecialThreeDScene):
 		"circle_xz_show": False,
 		"circle_xz_color": PINK,
 
-		"circle_xy_show": True,
+		"circle_xy_show": False,
 		"circle_xy_color": GREEN,
 
 		"circle_yz_show": False,
@@ -426,10 +426,7 @@ class BlochSphereHadamardRotate(BlochSphere):
 	def init_rotation_axis(self):
 		self.direction = 1/np.sqrt(2) * (X_AXIS + Z_AXIS)
 
-		d = Arrow3d(
-			start=ORIGIN,
-			end=self.direction * SPHERE_RADIUS
-		)
+	
 
 		x_arc = Arc(
 			arc_center=ORIGIN,
@@ -455,7 +452,6 @@ class BlochSphereHadamardRotate(BlochSphere):
 		x_arc.rotate_about_origin(90 * DEGREES, X_AXIS)
 		z_arc.rotate_about_origin(90 * DEGREES, X_AXIS)
 
-		self.add(d, x_arc, z_arc)
 
 	def haramard_rotate(self):
 		a = VGroup(self.old_zero.line, self.old_one.line)
@@ -470,65 +466,3 @@ class BlochSphereHadamardRotate(BlochSphere):
 			),
 			run_time=self.rotate_time
 		)
-
-
-class BlochSphereWalk(BlochSphere):
-	CONFIG = {
-		"show_intro": False,
-
-		"traj_max_length": 0, # 0 is infinite
-	}
-	def construct(self):
-		if self.show_intro:
-			self.present_introduction()
-		self.init_camera()
-		self.init_axes()
-		self.init_sphere()
-		self.init_states()
-		self.init_text()
-		self.wait(self.pre_operators_wait_time)
-
-		self.traj_zero = self.add_trajectory(self.old_zero, TEAL_C)
-
-		self.update_theta_and_phi()
-		
-		self.wait(self.final_wait_time)
-
-	def update_theta_and_phi(self):
-		theta = 0
-		phi   = 0
-
-		# update theta and phi by calling self.update_state
-
-	def update_state(self, theta, phi, wait=None):
-		print(f"theta={theta} ; phi={phi}")
-		new_zero = State(*angles_to_vector(theta, phi), r=2)
-		new_zero.set_color(BLUE)
-
-		traj = self.traj_zero
-		new_point = new_zero.line.get_end()
-		if get_norm(new_point - traj.points[-1]) > 0.01:
-			traj.add_smooth_curve_to(new_point)
-		traj.set_points(traj.points[-self.traj_max_length:])
-		
-		self.play(
-			Transform(self.old_zero, new_zero),
-			*self.update_tex_transforms(new_zero, self.one),
-			run_time=0.045, # 1/90 = 0.011111111111111112
-		)
-
-		if wait:
-			self.wait(wait)
-
-		return new_zero
-
-	def add_trajectory(self, state, color=None):
-		traj = VMobject()
-		traj.set_color(color or state.get_color())
-		traj.state = state
-
-		traj.start_new_path(state.line.get_end())
-		traj.set_stroke(state.get_color(), 1, opacity=0.75)
-
-		self.add(traj)
-		return traj
