@@ -333,7 +333,7 @@ class SceneFileWriter(object):
             Pixel array of the frame.
         """
         if self.write_to_movie:
-            self.writing_process.stdin.write(frame.tobytes())
+            self.writing_process.stdin.write(frame.tostring())
 
     def save_final_image(self, image):
         """
@@ -488,9 +488,18 @@ class SceneFileWriter(object):
             '-safe', '0',
             '-i', file_list,
             '-loglevel', 'error',
-            '-c', 'copy',
-            movie_file_path
+           
         ]
+        if not self.save_as_gif:
+            commands +=[
+                '-c', 'copy',
+                movie_file_path
+            ]
+        if self.save_as_gif:
+            movie_file_path=self.gif_file_path
+            commands +=[
+                movie_file_path,
+            ]
         if not self.includes_sound:
             commands.insert(-1, '-an')
 
