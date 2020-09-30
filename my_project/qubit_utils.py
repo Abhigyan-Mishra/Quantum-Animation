@@ -146,21 +146,6 @@ class RotationMatrix(object):
 		self.beta  = (b + c)/2
 		self.gamma = (c - b)/2j
 
-	# this other decomposition method is actually not used, but it stays here because
-	# 1) its always nice to see other decomposition methods
-	# 2) maybe one day it will become useful
-	@staticmethod
-	def _HS(M1, M2):
-		"""Hilbert-Schmidt-Product of two matrices M1, M2"""
-		return (np.dot(M1.conjugate().transpose(), M2)).trace()
-
-	def _decompose2(self):
-		self.alpha = self._HS(m,I) / 2
-		self.beta  = self._HS(m,X) / 2
-		self.gamma = self._HS(m,Y) / 2
-		self.delta = self._HS(m,Z) / 2
-
-
 	def _get_rotation_axis(self):
 		n = np.linalg.norm([
 			self.beta,

@@ -21,7 +21,7 @@ class State(Mobject):
 		return np.array( spherical_to_cartesian(self.r, self.theta, self.phi) )
 
 	def create_line(self):
-		return Arrow3d(
+		return Line(
 			start=ORIGIN,
 			end=self._get_cartesian(),
 		)
@@ -48,7 +48,7 @@ state_minus = State(1/np.sqrt(2), -1/np.sqrt(2), r=SPHERE_RADIUS)
 class BlochSphere(SpecialThreeDScene):
 	CONFIG = {
 		"three_d_axes_config": {
-			"num_axis_pieces": 1,
+			"num_axis_pieces": 2,
 			"number_line_config": {
 				"unit_size": 2,
 				"tick_frequency": 1,
