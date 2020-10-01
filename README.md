@@ -1,15 +1,10 @@
-![logo](logo/cropped.png)
+![logo](https://i.imgur.com/4lRkZw4.png)
 
-[![Build Status](https://travis-ci.org/3b1b/manim.svg?branch=master)](https://travis-ci.org/3b1b/manim)
-[![Documentation](https://img.shields.io/badge/docs-EulerTour-blue.svg)](https://www.eulertour.com/docs)
-[![MIT License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat)](http://choosealicense.com/licenses/mit/)
-[![Manim Subreddit](https://img.shields.io/reddit/subreddit-subscribers/manim.svg?color=ff4301&label=reddit)](https://www.reddit.com/r/manim/)
-[![Manim Discord](https://img.shields.io/discord/581738731934056449.svg?label=discord)](https://discord.gg/mMRrZQW)
+
 
 Manim is an animation engine for explanatory math videos. It's used to create precise animations programmatically, as seen in the videos at [3Blue1Brown](https://www.3blue1brown.com/).
 
 This repository contains the version of manim used by 3Blue1Brown. There is also a community maintained version at https://github.com/ManimCommunity/manim/.
-To get help or to join the development effort, please join the [discord](https://discord.gg/mMRrZQW).
 
 ## Installation
 Manim runs on Python 3.7. You can install it from PyPI via pip:
@@ -26,87 +21,13 @@ You can now use it via the `manim` command. For example:
 manim my_project.py MyScene
 ```
 
-For more options, take a look at the [Using manim](#using-manim) sections further below.
+For more options, take a look at [documentation](https://manimce.readthedocs.io/en/latest/installation.html)and follow the instructions according to your operating system.
 
-### Directly
-
-If you want to hack on manimlib itself, clone this repository and in that directory execute:
-
-```sh
-# Install python requirements
-python3 -m pip install -r requirements.txt
-
-# Try it out
-python3 ./manim.py example_scenes.py SquareToCircle -pl
-```
-
-### Directly (Windows)
-1. [Install FFmpeg](https://www.wikihow.com/Install-FFmpeg-on-Windows).
-2. [Install Cairo](https://www.lfd.uci.edu/~gohlke/pythonlibs/#pycairo). For most users, ``pycairo‑1.18.0‑cp37‑cp37m‑win32.whl`` will do fine.
-    ```sh
-    pip3 install C:\path\to\wheel\pycairo‑1.18.0‑cp37‑cp37m‑win32.whl
-    ```
-3. Install a LaTeX distribution. [MiKTeX](https://miktex.org/download) is recommended.
-
-4. [Install SoX](https://sourceforge.net/projects/sox/files/sox/).
-
-5. Install the remaining Python packages. Make sure that ``pycairo==1.17.1`` is changed to ``pycairo==1.18.0`` in requirements.txt.
-    ```sh
-    git clone https://github.com/3b1b/manim.git
-    cd manim
-    pip3 install -r requirements.txt
-    python3 manim.py example_scenes.py SquareToCircle -pl
-    ```
-
-
-## Anaconda Install
-
-* Install sox and latex as above. 
-* Create a conda environment using `conda env create -f environment.yml`
-* **WINDOWS ONLY** Install `pyreadline` via `pip install pyreadline`. 
-
-
-### Using `virtualenv` and `virtualenvwrapper`
-After installing `virtualenv` and `virtualenvwrapper`
-```sh
-git clone https://github.com/3b1b/manim.git
-mkvirtualenv -a manim -r requirements.txt manim
-python3 -m manim example_scenes.py SquareToCircle -pl
-```
-
-### Using Docker
-Since it's a bit tricky to get all the dependencies set up just right, there is a Dockerfile and Compose file provided in this repo as well as [a premade image on Docker Hub](https://hub.docker.com/r/eulertour/manim/tags/). The Dockerfile contains instructions on how to build a manim image, while the Compose file contains instructions on how to run the image.
-
-The prebuilt container image has manim repository included.
-`INPUT_PATH` is where the container looks for scene files. You must set the `INPUT_PATH`
-environment variable to the absolute path containing your scene file and the
-`OUTPUT_PATH` environment variable to the directory where you want media to be written.
-
-1. [Install Docker](https://docs.docker.com)
-2. [Install Docker Compose](https://docs.docker.com/compose/install/)
-3. Render an animation:
-```sh
-INPUT_PATH=/path/to/dir/containing/source/code \
-OUTPUT_PATH=/path/to/output/ \
-docker-compose run manim example_scenes.py SquareToCircle -l
-```
-The command needs to be run as root if your username is not in the docker group.
-
-You can replace `example.scenes.py` with any relative path from your `INPUT_PATH`.
-
-![docker diagram](./manim_docker_diagram.png)
-
-After running the output will say files ready at `/tmp/output/`, which refers to path inside the container. Your `OUTPUT_PATH` is bind mounted to this `/tmp/output` so any changes made by the container to `/tmp/output` will be mirrored on your `OUTPUT_PATH`. `/media/` will be created in `OUTPUT_PATH`.
-
-`-p` won't work as manim would look for video player in the container system, which it does not have.
-
-The first time you execute the above command, Docker will pull the image from Docker Hub and cache it. Any subsequent runs until the image is evicted will use the cached image.
-Note that the image doesn't have any development tools installed and can't preview animations. Its purpose is building and testing only.
 
 ## Using manim
 Try running the following:
 ```sh
-python3 -m manim example_scenes.py SquareToCircle -pl
+python3 -m  manim BlochSphere_Example.py -pl
 ```
 The `-p` flag in the command above is for previewing, meaning the video file will automatically open when it is done rendering. The `-l` flag is for a faster rendering at a lower quality.
 
@@ -124,13 +45,14 @@ While developing a scene, the `-sp` flags are helpful to just see what things lo
 ### Documentation
 Documentation is in progress at [eulertour.com/docs](https://www.eulertour.com/docs/).
 
-### Walkthrough
-Todd Zimmerman put together a [tutorial](https://talkingphysics.wordpress.com/2019/01/08/getting-started-animating-with-manim-and-python-3-7/) on getting started with manim, which has been updated to run on Python 3.7.
+## Quantum Animation Examples
+### Bloch Sphere(Hadamard Gate)
+![](https://i.imgur.com/0S6jLaH.gif)
 
 ## Contributing
-Although they are welcome, pull requests to this repository are rarely accepted. Most pull requests should be directed to the [community version](https://github.com/ManimCommunity/manim/).
+Pull requests to this repository are welcomed.
+Any improvement in manim should be directed to the [community version](https://github.com/ManimCommunity/manim/).
 
 ## License
-All files in the directory `from_3b1b`, which by and large generate the visuals for 3b1b videos, are copyright 3Blue1Brown.
 
-The general purpose animation code found in the remainder of the repository, on the other hand, is under the MIT license.
+The general purpose animation code found in the the repository is under the MIT license.
