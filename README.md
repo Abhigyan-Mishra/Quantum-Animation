@@ -48,7 +48,9 @@ Documentation is in progress at [eulertour.com/docs](https://www.eulertour.com/d
 ## Quantum Animation Examples
 ### Bloch Sphere(Hadamard Gate)
 ![](https://i.imgur.com/0S6jLaH.gif)
-
+## Algorithm Added
+- [x]  Pauli Rotational Gates
+- [x] Hadamard Gate
 ## Contributing
 Pull requests to this repository are welcomed.
 Any improvement in manim should be directed to the [community version](https://github.com/ManimCommunity/manim/).
