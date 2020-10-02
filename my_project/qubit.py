@@ -111,18 +111,18 @@ class BlochSphere(SpecialThreeDScene):
 	def present_introduction(self):
 		self.intro_tex_1 = TextMobject(
 			"\\begin{flushleft}\n"
-			"The State of the Qbit"
+			"The State of the Qubit"
 			"\\\\"
 			"as represented in the Bloch Sphere."
 			"\n\\end{flushleft}",
 			alignment="",
 		)
 		# self.intro_tex_1 = TextMobject(
-		# 	# "\\begin{align*}\n" + "The state of the Qbit" + "\n\\end{align*}",
-		# 	"\\begin{flalign}\n" + "The state of the Qbit" + "\n\\end{flalign}",
-		# 	# "The state of the Qbit",
+		# 	# "\\begin{align*}\n" + "The state of the Qubit" + "\n\\end{align*}",
+		# 	"\\begin{flalign}\n" + "The state of the Qubit" + "\n\\end{flalign}",
+		# 	# "The state of the Qubit",
 		# 	# "\\begin{flushleft}"
-		# 	# "The state of the Qbit"
+		# 	# "The state of the Qubit"
 		# 	# "\\\\"
 		# 	# "as represented in the Bloch Sphere."
 		# 	# "\\end{flushleft}",
